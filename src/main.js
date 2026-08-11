@@ -810,7 +810,7 @@ function drawLengthOverlay(width, height) {
   updateLengthReadout();
   updateBallStatusUI();
   if (els.detectStatusLength) {
-    els.detectStatusLength.textContent = "수동 조정";
+    els.detectStatusLength.textContent = t("status.manualAdjust");
     els.detectStatusLength.classList.remove("is-warn");
     els.detectStatusLength.classList.add("is-ok");
   }

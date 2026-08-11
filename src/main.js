@@ -1343,42 +1343,34 @@ function updateLevelUI(force = false) {
   els.levelStatus.classList.toggle("is-warn", !freezeReady);
 
   if (holdDone) {
-    els.levelLabel.textContent = lie
-      ? "✓ Pitch·Roll ±0.5° · 화면 고정"
-      : "✓ ±0.5° 수평 · 위에서 고정";
+    els.levelLabel.textContent = lie ? t("level.doneLie") : t("level.doneLength");
   } else if (freezeReady) {
     const left = Math.max(0, (freezeHoldMs - holdMs) / 1000);
     els.levelLabel.textContent = lie
-      ? `Pitch·Roll 유지 중… ${left.toFixed(1)}s`
-      : `수평 유지 중… ${left.toFixed(1)}s`;
+      ? t("level.holdLie", { sec: left.toFixed(1) })
+      : t("level.holdLength", { sec: left.toFixed(1) });
   } else if (lie) {
     if (pitchErr >= lieWingRollErr) {
       els.levelLabel.textContent =
-        pitchSign > 0
-          ? "앞으로 기울여 Pitch를 맞추세요"
-          : "뒤로 기울여 Pitch를 맞추세요";
+        pitchSign > 0 ? t("level.tiltPitchFwd") : t("level.tiltPitchBack");
     } else {
       const wing = getLieRollDeg();
       els.levelLabel.textContent =
-        wing > 0
-          ? "왼쪽으로 기울여 Roll 수평을 맞추세요"
-          : "오른쪽으로 기울여 Roll 수평을 맞추세요";
+        wing > 0 ? t("level.tiltRollLeft") : t("level.tiltRollRight");
     }
   } else if (nowLevel) {
-    els.levelLabel.textContent = "조금만 더 — ±0.5°까지 맞추세요";
+    els.levelLabel.textContent = t("level.almost");
   } else if (rollErr >= pitchErr) {
     els.levelLabel.textContent =
-      rollSign > 0 ? "왼쪽으로 기울여 수평을 맞추세요" : "오른쪽으로 기울여 수평을 맞추세요";
+      rollSign > 0 ? t("level.tiltRollFlatLeft") : t("level.tiltRollFlatRight");
   } else {
     els.levelLabel.textContent =
-      pitchSign > 0 ? "앞으로 기울여 Pitch를 맞추세요" : "뒤로 기울여 Pitch를 맞추세요";
+      pitchSign > 0 ? t("level.tiltPitchFwd") : t("level.tiltPitchBack");
   }
 
   if (becameHoldDone && state.ready && !state.frozen) {
     vibrateLevelOk();
-    els.levelFlash.textContent = lie
-      ? "Pitch·Roll ±0.5° 유지 · 화면 고정"
-      : "±0.5° 유지 · 고정 후 공 인식";
+    els.levelFlash.textContent = lie ? t("level.flashLie") : t("level.flashLength");
     flashLevelComplete();
     freezeFrame();
   }

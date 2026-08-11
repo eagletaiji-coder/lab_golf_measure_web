@@ -1001,11 +1001,14 @@ function drawOverlay() {
   const ea = state.edgeAngles;
   let shaftTag;
   if (dual && ea.left != null && ea.right != null) {
-    shaftTag = `양면 ${ea.left.toFixed(1)}° / ${ea.right.toFixed(1)}° → 평균`;
+    shaftTag = t("overlay.dualEdge", {
+      left: ea.left.toFixed(1),
+      right: ea.right.toFixed(1),
+    });
   } else if (state.detectOk && state.autoDetect) {
-    shaftTag = "샤프트 · 자동";
+    shaftTag = t("overlay.shaftAuto");
   } else {
-    shaftTag = "샤프트 (끝점 드래그)";
+    shaftTag = t("overlay.shaftManual");
   }
   ctx.fillText(shaftTag, Math.min(x1, x2) + 10, Math.min(y1, y2) - 8);
 

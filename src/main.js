@@ -1936,7 +1936,7 @@ function freezeFrame() {
   state.frozen = true;
   state.freezeHoldSince = 0;
   els.viewport.classList.add("is-frozen");
-  els.freezeBtn.textContent = "다시 촬영";
+  els.freezeBtn.textContent = t("ctrl.retake");
   els.levelHud.classList.add("is-hidden");
   stashActiveFreeze();
   if (!isLieMode()) {

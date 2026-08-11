@@ -2023,16 +2023,15 @@ function runBallDetect(seedOverride = undefined) {
     els.measureHint.classList.remove("is-detecting", "is-miss");
     els.measureHint.classList.add("is-locked");
     els.measureHint.textContent = seed
-      ? "지정 지점 주변에서 공 인식됨 · 드래그로 보정"
-      : "골프공 자동 인식됨 · 필요하면 드래그로 보정";
+      ? t("ball.detectOkSeed")
+      : t("ball.detectOkAuto");
   } else if (els.ballStatus) {
-    els.ballStatus.textContent = "미검출 · 공 위를 탭";
+    els.ballStatus.textContent = t("ball.notFoundTap");
     els.ballStatus.classList.add("is-warn");
     els.ballStatus.classList.remove("is-ok");
     els.measureHint.classList.remove("is-detecting");
     els.measureHint.classList.add("is-miss");
-    els.measureHint.textContent =
-      "자동 인식 실패 · 골프공 위를 탭하거나 「공 인식」";
+    els.measureHint.textContent = t("ball.detectMiss");
   }
   drawOverlay();
 }

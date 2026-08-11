@@ -318,6 +318,11 @@
     document.documentElement.lang = lang === "ko" ? "ko" : "en";
     document.title = t("page.title");
 
+    root.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-aria");
+      if (key) el.setAttribute("aria-label", t(key));
+    });
+
     root.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       if (!key) return;

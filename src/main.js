@@ -1737,9 +1737,7 @@ async function requestMotionPermission() {
 
 async function startCamera() {
   if (!navigator.mediaDevices?.getUserMedia) {
-    throw new Error(
-      "이 브라우저는 카메라를 지원하지 않습니다. HTTPS 또는 localhost에서 Safari/Chrome으로 열어 주세요."
-    );
+    throw new Error(t("error.noCamera"));
   }
   try {
     const stream = await navigator.mediaDevices.getUserMedia({

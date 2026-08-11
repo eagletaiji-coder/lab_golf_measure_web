@@ -2106,7 +2106,7 @@ function captureResult() {
     fileTag = `${getLieAngle().toFixed(1)}deg`;
   } else {
     const info = getShaftLengthInfo();
-    octx.fillText("LieLine 샤프트 길이", 24, 34);
+    octx.fillText(t("capture.lengthTitle"), 24, 34);
     octx.font = "700 22px Fraunces, serif";
     const text = info ? `${info.inches.toFixed(1)} in` : "—";
     octx.fillText(text, 24, 60);

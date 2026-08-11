@@ -642,7 +642,7 @@ function updateLengthReadout() {
 function updateBallStatusUI() {
   if (!els.ballStatus) return;
   if (!state.ball) {
-    els.ballStatus.textContent = "미설정";
+    els.ballStatus.textContent = t("ball.unset");
     els.ballStatus.classList.remove("is-ok");
     els.ballStatus.classList.add("is-warn");
   } else {

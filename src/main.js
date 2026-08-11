@@ -275,8 +275,8 @@ function applyActiveModeUi() {
 
   const rollSpan = els.levelHud?.querySelector(".level-meter:not(.is-pitch) span");
   const pitchSpan = els.levelHud?.querySelector(".level-meter.is-pitch span");
-  if (rollSpan) rollSpan.textContent = lie ? "Roll" : "좌우";
-  if (pitchSpan) pitchSpan.textContent = lie ? "Pitch" : "상하";
+  if (rollSpan) rollSpan.textContent = lie ? t("meter.roll") : t("meter.lr");
+  if (pitchSpan) pitchSpan.textContent = lie ? t("meter.pitch") : t("meter.ud");
 
   if (s.frozen && s.freezeCanvas) {
     els.freeze.width = s.freezeCanvas.width;
@@ -284,52 +284,52 @@ function applyActiveModeUi() {
     els.freeze.getContext("2d").drawImage(s.freezeCanvas, 0, 0);
     els.viewport.classList.add("is-frozen");
     els.levelHud?.classList.add("is-hidden");
-    if (els.freezeBtn) els.freezeBtn.textContent = "다시 촬영";
+    if (els.freezeBtn) els.freezeBtn.textContent = t("ctrl.retake");
   } else {
     els.viewport.classList.remove("is-frozen");
     els.levelHud?.classList.remove("is-hidden");
-    if (els.freezeBtn) els.freezeBtn.textContent = "화면 고정";
+    if (els.freezeBtn) els.freezeBtn.textContent = t("ctrl.freeze");
   }
 
   if (lie) {
     els.viewport.classList.toggle("is-adjusting", s.frozen && !s.autoDetect);
     if (els.autoBtn) {
-      els.autoBtn.textContent = s.autoDetect ? "자동 인식 ON" : "자동 인식 OFF";
+      els.autoBtn.textContent = s.autoDetect ? t("ctrl.autoOn") : t("ctrl.autoOff");
       els.autoBtn.classList.toggle("is-on", s.autoDetect);
     }
     if (!s.frozen) {
       els.measureHint.classList.remove("is-detecting", "is-locked", "is-miss");
       els.measureHint.textContent = s.autoDetect
-        ? "샤프트 자동 인식 중…"
-        : "수동 측정 · 끝점을 드래그하세요";
+        ? t("measureHint.shaftDetecting")
+        : t("measureHint.manualDrag");
     }
   } else {
     if (els.autoBtn) {
-      els.autoBtn.textContent = "공 자동 인식";
+      els.autoBtn.textContent = t("ball.autoDetect");
       els.autoBtn.classList.remove("is-on");
     }
     if (s.frozen) {
       els.viewport.classList.add("is-adjusting");
       els.measureHint.classList.remove("is-detecting", "is-miss");
       els.measureHint.classList.add("is-locked");
-      els.measureHint.textContent =
-        "그립·헤드 끝점을 드래그해 샤프트를 맞추세요";
+      els.measureHint.textContent = t("measureHint.lengthFrozen");
     } else {
       els.viewport.classList.remove("is-adjusting");
       els.measureHint.classList.remove("is-detecting", "is-locked", "is-miss");
-      els.measureHint.textContent =
-        "핸드폰을 눕혀 ±0.5° 유지 → 자동 고정 · 샤프트 수동 · 공 자동";
+      els.measureHint.textContent = t("measureHint.lengthIdle");
     }
     updateBallStatusUI();
     updateLengthReadout();
   }
 
+  const di = s.detectI18n || { key: "status.waiting", params: {} };
+  const detectText = t(di.key, di.params);
   if (els.detectStatus) {
-    els.detectStatus.textContent = s.detectLabel || "대기";
+    els.detectStatus.textContent = detectText;
     els.detectStatus.classList.toggle("is-ok", s.detectOk);
   }
   if (els.detectStatusLength) {
-    els.detectStatusLength.textContent = s.detectLabel || "대기";
+    els.detectStatusLength.textContent = detectText;
   }
   if (els.trimValue) {
     const t = s.angleTrim || 0;

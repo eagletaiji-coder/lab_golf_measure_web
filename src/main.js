@@ -789,11 +789,7 @@ function drawLengthOverlay(width, height) {
   } else if (!state.ballSeed) {
     ctx.fillStyle = "rgba(243, 247, 244, 0.65)";
     ctx.font = "500 12px Outfit, sans-serif";
-    ctx.fillText(
-      "골프공 자동 인식 중… 실패 시 공 위를 탭하세요",
-      width * 0.08,
-      height * 0.1
-    );
+    ctx.fillText(t("ball.overlayHint"), width * 0.08, height * 0.1);
   }
 
   const info = getShaftLengthInfo();

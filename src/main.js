@@ -93,6 +93,17 @@ const els = {
   downloadLink: document.getElementById("downloadLink"),
 };
 
+function t(key, params) {
+  return window.LieI18n?.t(key, params) ?? key;
+}
+
+function refreshI18n() {
+  window.LieI18n?.applyStatic?.();
+  applyActiveModeUi();
+  updateLevelUI(true);
+  drawOverlay();
+}
+
 const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * 34; // r=34 in SVG
 const ARROW_THRESHOLD_DEG = 1.2;
 

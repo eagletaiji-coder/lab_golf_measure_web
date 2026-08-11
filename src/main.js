@@ -2049,8 +2049,7 @@ function unfreezeFrame() {
   els.levelHud.classList.remove("is-hidden");
   if (!isLieMode()) {
     els.viewport.classList.remove("is-adjusting");
-    els.measureHint.textContent =
-      "핸드폰을 눕혀 ±0.5° 유지 → 자동 고정 · 샤프트 수동 · 공 자동";
+    els.measureHint.textContent = t("measureHint.lengthIdle");
   }
 }
 

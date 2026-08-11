@@ -1569,7 +1569,7 @@ function runShaftDetect(force = false) {
     }
   } catch (err) {
     console.warn("shaft detect failed", err);
-    setDetectStatus("오류", "miss");
+    setDetectStatus("detect.error", "miss");
   } finally {
     state.detectBusy = false;
   }

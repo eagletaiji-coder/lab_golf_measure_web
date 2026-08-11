@@ -1,0 +1,9 @@
+# LieLine
+# Dependencies
+node_modules
+
+# Build
+dist
+.DS_Store
+*.local
+*.zip

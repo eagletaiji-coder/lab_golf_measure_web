@@ -1,0 +1,9 @@
+{
+  "name": "putter-lie-angle",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "python serve.py 5173",
+    "dev": "python serve.py 5173"
+  }
+}

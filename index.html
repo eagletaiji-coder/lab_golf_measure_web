@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#0b1f14" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="screen-orientation" content="portrait" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <!-- TEMP: disable cache while testing — remove later -->
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>LieLine — 퍼터 라이각 측정</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" id="app-css" href="./src/styles.css" />
+  </head>
+  <body>
+    <div class="rotate-gate" id="rotateGate" aria-live="polite">
+      <p>세로 모드로 사용해 주세요</p>
+      <span>기기를 세로로 세워 주세요</span>
+    </div>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <h1>LieLine</h1>
+        </div>
+        <p class="tagline">퍼터 라이각 · 샤프트 길이</p>
+      </header>
+
+      <nav class="mode-tabs" id="modeTabs" aria-label="측정 모드">
+        <button type="button" class="mode-tab is-active" data-mode="lie" id="modeLie">
+          라이각
+        </button>
+        <button type="button" class="mode-tab" data-mode="length" id="modeLength">
+          샤프트 길이
+        </button>
+      </nav>
+
+      <main class="stage">
+        <div class="viewport is-mode-lie" id="viewport">
+          <video id="camera" playsinline autoplay muted></video>
+          <canvas id="freeze" aria-hidden="true"></canvas>
+          <canvas id="overlay" aria-hidden="true"></canvas>
+
+          <div class="level-frame" id="levelFrame" aria-hidden="true"></div>
+
+          <div class="tilt-arrows" id="tiltArrows" aria-hidden="true">
+            <span class="tilt-arrow up" data-dir="up">▲</span>
+            <span class="tilt-arrow down" data-dir="down">▼</span>
+            <span class="tilt-arrow left" data-dir="left">◀</span>
+            <span class="tilt-arrow right" data-dir="right">▶</span>
+          </div>
+
+          <div class="level-hud" id="levelHud">
+            <div class="level-ring" id="levelRing">
+              <svg class="level-progress" viewBox="0 0 80 80" aria-hidden="true">
+                <circle class="level-progress-track" cx="40" cy="40" r="34" />
+                <circle class="level-progress-bar" id="levelProgressBar" cx="40" cy="40" r="34" />
+              </svg>
+              <div class="level-sweet-spot" aria-hidden="true"></div>
+              <div class="level-bubble" id="levelBubble"></div>
+              <div class="level-cross" aria-hidden="true"></div>
+            </div>
+            <div class="level-meters">
+              <div class="level-meter">
+                <span>Roll</span>
+                <div class="level-meter-track">
+                  <i id="rollMeter"></i>
+                </div>
+              </div>
+              <div class="level-meter is-pitch">
+                <span>Pitch</span>
+                <div class="level-meter-track">
+                  <i id="pitchMeter"></i>
+                </div>
+              </div>
+            </div>
+            <p class="level-label" id="levelLabel">기기를 수평으로 맞춰 주세요</p>
+            <p class="level-flash" id="levelFlash">Pitch·Roll ±0.5° 유지 · 화면 고정</p>
+          </div>
+
+          <div class="measure-hint" id="measureHint">
+            샤프트 자동 인식 중…
+          </div>
+
+          <div class="permission-gate" id="permissionGate">
+            <p>카메라와 모션 센서로<br />측정을 시작합니다</p>
+            <button type="button" class="btn primary" id="startBtn">
+              측정 시작
+            </button>
+            <p class="gate-note">모드를 선택한 뒤 촬영하세요</p>
+          </div>
+        </div>
+
+        <section class="readout" aria-live="polite">
+          <div class="panel-lie" id="panelLie">
+            <div class="angle-block">
+              <span class="angle-label">라이각</span>
+              <div class="angle-value">
+                <span id="lieAngle">—</span><span class="unit">°</span>
+              </div>
+              <div class="angle-sub" id="angleSub">화면각 — · 보정 —</div>
+              <div class="trim-row">
+                <span class="trim-label">미세조정</span>
+                <button type="button" class="btn trim" id="trimMinus" disabled>−1°</button>
+                <span class="trim-value" id="trimValue">0.0°</span>
+                <button type="button" class="btn trim" id="trimPlus" disabled>+1°</button>
+                <button type="button" class="btn trim" id="trimReset" disabled>리셋</button>
+              </div>
+            </div>
+            <div class="meta-row">
+              <div class="meta">
+                <span class="meta-label">기울기</span>
+                <span class="meta-value" id="deviceTilt">—</span>
+              </div>
+              <div class="meta">
+                <span class="meta-label">수평 상태</span>
+                <span class="meta-value" id="levelStatus">대기</span>
+              </div>
+              <div class="meta meta-wide">
+                <span class="meta-label">피치 보정</span>
+                <span class="meta-value" id="pitchStatus">대기</span>
+              </div>
+              <div class="meta meta-wide">
+                <label class="floor-comp">
+                  <input type="checkbox" id="floorCompChk" checked />
+                  바닥 촬영 보정 (내려다보기 최소 피치)
+                </label>
+              </div>
+              <div class="meta meta-wide">
+                <span class="meta-label">샤프트 인식</span>
+                <span class="meta-value" id="detectStatus">대기</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-length is-hidden" id="panelLength">
+            <div class="length-block">
+              <span class="angle-label">샤프트 길이</span>
+              <div class="length-value">
+                <span id="shaftLength">—</span>
+              </div>
+              <div class="angle-sub" id="lengthSub">
+                ±0.5° 유지 → 자동 고정 · 샤프트 수동 · 공 Ø 42.7mm
+              </div>
+              <div class="ball-row">
+                <label class="ball-diam-label" for="ballDiamMm">공 지름</label>
+                <input
+                  type="number"
+                  id="ballDiamMm"
+                  class="ball-diam-input"
+                  min="40"
+                  max="46"
+                  step="0.01"
+                  value="42.7"
+                  disabled
+                />
+                <span class="ball-diam-unit">mm</span>
+                <button type="button" class="btn trim" id="ballDetectBtn" disabled>
+                  공 자동 인식
+                </button>
+                <button type="button" class="btn trim" id="ballClearBtn" disabled>
+                  공 지우기
+                </button>
+              </div>
+              <div class="meta-row length-meta">
+                <div class="meta meta-wide">
+                  <span class="meta-label">샤프트</span>
+                  <span class="meta-value" id="detectStatusLength">수동 조정</span>
+                </div>
+                <div class="meta meta-wide">
+                  <span class="meta-label">골프공</span>
+                  <span class="meta-value" id="ballStatus">미설정</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="controls">
+          <button type="button" class="btn ghost" id="freezeBtn" disabled>
+            화면 고정
+          </button>
+          <button type="button" class="btn ghost" id="resetBtn" disabled>
+            초기화
+          </button>
+          <button type="button" class="btn accent" id="autoBtn" disabled>
+            자동 인식
+          </button>
+          <button type="button" class="btn primary" id="captureBtn" disabled>
+            결과 저장
+          </button>
+        </section>
+
+        <ol class="howto" id="howtoLie">
+          <li>퍼터를 평평한 바닥에 솔(sole)이 닿게 놓습니다.</li>
+          <li>기기를 세로로 세운 뒤 Pitch·Roll을 각각 ±0.5°로 0.5초 이상 유지하면 화면이 자동 고정됩니다.</li>
+          <li>자동 인식 후 샤프트 양면 엣지 평균으로 라이각을 측정합니다.</li>
+        </ol>
+        <ol class="howto is-hidden" id="howtoLength">
+          <li>퍼터와 골프공을 같은 바닥에 나란히 둡니다.</li>
+          <li>핸드폰을 <strong>눕혀</strong> 위에서 비추고, ±0.5° 수평을 약 0.5초 유지하면 자동 고정·공 인식됩니다.</li>
+          <li>고정 후 <strong>그립·헤드 끝점을 드래그</strong>해 샤프트 길이를 맞춥니다.</li>
+        </ol>
+      </main>
+    </div>
+
+    <a id="downloadLink" hidden></a>
+    <script>
+      // TEMP: bust CSS/JS cache every page load — remove later
+      (function () {
+        var v = Date.now();
+        var css = document.getElementById("app-css");
+        if (css) css.href = "./src/styles.css?v=" + v;
+
+        function load(src) {
+          return new Promise(function (resolve, reject) {
+            var s = document.createElement("script");
+            s.src = src;
+            s.onload = resolve;
+            s.onerror = reject;
+            document.body.appendChild(s);
+          });
+        }
+
+        load("./src/shaftDetect.js?v=" + v)
+          .then(function () {
+            return load("./src/ballDetect.js?v=" + v);
+          })
+          .then(function () {
+            return load("./src/main.js?v=" + v);
+          })
+          .catch(function (err) {
+            console.error("script load failed", err);
+            alert("스크립트 로드 실패. 새로고침 해 주세요.");
+          });
+      })();
+    </script>
+  </body>
+</html>

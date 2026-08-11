@@ -1,0 +1,10 @@
+{
+  "name": "LieLine",
+  "short_name": "LieLine",
+  "description": "퍼터 라이각 · 샤프트 길이 측정",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07140e",
+  "theme_color": "#0b1f14"
+}

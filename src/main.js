@@ -672,11 +672,7 @@ function drawLengthOverlay(width, height) {
     ctx.fillStyle = "rgba(243, 247, 244, 0.75)";
     ctx.font = "600 13px Outfit, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(
-      "좌우 ±0.5° 유지 시 자동 고정 · 공 Ø 42.7mm",
-      width / 2,
-      height * 0.12
-    );
+    ctx.fillText(t("length.guideOverlay"), width / 2, height * 0.12);
     ctx.textAlign = "start";
     updateLengthReadout();
     updateBallStatusUI();

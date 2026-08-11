@@ -1516,7 +1516,7 @@ function runShaftDetect(force = false) {
 
   const source = state.frozen ? els.freeze : els.camera;
   if (!state.frozen && !els.camera.videoWidth) {
-    setDetectStatus("카메라 대기…", "detecting");
+    setDetectStatus("detect.cameraWait", "detecting");
     return;
   }
   if (state.frozen && !els.freeze.width) return;

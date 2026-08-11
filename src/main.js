@@ -625,8 +625,8 @@ function updateLengthReadout() {
     els.shaftLength.textContent = "—";
     if (els.lengthSub) {
       els.lengthSub.textContent = state.ball
-        ? "샤프트 끝점을 그립~헤드에 맞춰 주세요"
-        : "공 자동 인식 중… 또는 공 위를 탭하세요";
+        ? t("length.alignShaft")
+        : t("length.ballHint");
     }
     return;
   }

@@ -1985,9 +1985,7 @@ function runBallDetect(seedOverride = undefined) {
 
   els.measureHint.classList.remove("is-miss", "is-locked");
   els.measureHint.classList.add("is-detecting");
-  els.measureHint.textContent = seed
-    ? "지정 지점에서 공 인식 중…"
-    : "골프공 자동 인식 중…";
+  els.measureHint.textContent = seed ? t("ball.detectAtSeed") : t("ball.detectAuto");
 
   const source = state.frozen ? els.freeze : els.camera;
   const rect = els.viewport.getBoundingClientRect();

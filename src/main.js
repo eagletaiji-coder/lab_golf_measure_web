@@ -1591,16 +1591,16 @@ function setAutoDetect(on) {
   }
   state.autoDetect = on;
   els.autoBtn.classList.toggle("is-on", on);
-  els.autoBtn.textContent = on ? "자동 인식 ON" : "자동 인식 OFF";
+  els.autoBtn.textContent = on ? t("ctrl.autoOn") : t("ctrl.autoOff");
   els.viewport.classList.toggle("is-adjusting", !on);
   if (on) {
     state.missStreak = 0;
     state.lastDetectAt = 0;
-    setDetectStatus("인식 중…", "detecting");
+    setDetectStatus("detect.searching", "detecting");
     runShaftDetect(true);
   } else {
     state.detectOk = false;
-    setDetectStatus("수동", "manual");
+    setDetectStatus("detect.manual", "manual");
   }
   drawOverlay();
 }

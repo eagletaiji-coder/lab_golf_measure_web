@@ -1842,7 +1842,7 @@ function onPointerDown(e) {
   // Length mode: tap empty space = set seed point, then detect locally there
   if (!hit && !isLieMode()) {
     state.ballSeed = { cx: p.x, cy: p.y };
-    els.measureHint.textContent = "지정 지점에서 공 인식 중…";
+    els.measureHint.textContent = t("ball.detectAtSeed");
     els.measureHint.classList.add("is-detecting");
     drawOverlay();
     queueMicrotask(() => runBallDetect(state.ballSeed));

@@ -197,7 +197,6 @@
         "Hold the device upright; keep Pitch·Roll within ±0.5° for 0.5s to auto-freeze.",
       "howto.lie.3":
         "After detection, lie angle is measured from averaged dual-edge shaft lines.",
-      "howto.lie.3": "Lie angle uses the average of both shaft edges after auto-detect.",
       "howto.length.1": "Place the putter and golf ball side by side on the floor.",
       "howto.length.2":
         "Lay the phone <strong>flat</strong> from above; hold ±0.5° level ~0.5s to auto-freeze and detect the ball.",

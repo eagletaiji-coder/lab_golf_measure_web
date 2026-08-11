@@ -2141,7 +2141,7 @@ async function lockPortrait() {
 
 async function start() {
   els.startBtn.disabled = true;
-  els.startBtn.textContent = "준비 중…";
+  els.startBtn.textContent = t("permission.preparing");
   try {
     await lockPortrait();
     await requestMotionPermission();

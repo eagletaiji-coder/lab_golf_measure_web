@@ -1334,11 +1334,11 @@ function updateLevelUI(force = false) {
 
   els.levelStatus.textContent = freezeReady
     ? holdDone
-      ? "수평 OK"
-      : `유지 ${(holdMs / 1000).toFixed(1)}s`
+      ? t("status.levelOk")
+      : t("status.hold", { sec: (holdMs / 1000).toFixed(1) })
     : nowLevel
-      ? "거의 수평"
-      : "기울어짐";
+      ? t("status.almostLevel")
+      : t("status.tilted");
   els.levelStatus.classList.toggle("is-ok", holdDone);
   els.levelStatus.classList.toggle("is-warn", !freezeReady);
 

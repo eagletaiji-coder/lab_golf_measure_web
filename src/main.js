@@ -1048,7 +1048,7 @@ function drawOverlay() {
       els.pitchStatus.classList.add("is-ok");
       els.pitchStatus.classList.remove("is-warn");
     } else {
-      els.pitchStatus.textContent = "피치 보정 없음";
+      els.pitchStatus.textContent = t("pitch.none");
       els.pitchStatus.classList.remove("is-ok", "is-warn");
     }
   }

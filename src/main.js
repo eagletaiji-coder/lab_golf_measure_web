@@ -2045,7 +2045,7 @@ function unfreezeFrame() {
   state.apparentHistory = [];
   if (isLieMode()) recenterLieYaw();
   els.viewport.classList.remove("is-frozen");
-  els.freezeBtn.textContent = "화면 고정";
+  els.freezeBtn.textContent = t("ctrl.freeze");
   els.levelHud.classList.remove("is-hidden");
   if (!isLieMode()) {
     els.viewport.classList.remove("is-adjusting");

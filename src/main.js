@@ -2073,7 +2073,7 @@ function resetMeasure() {
     els.measureHint.textContent = t("reset.lengthHint");
     els.viewport.classList.toggle("is-adjusting", state.frozen);
   } else {
-    setDetectStatus("수동", "manual");
+    setDetectStatus("detect.manual", "manual");
   }
   drawOverlay();
 }

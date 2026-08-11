@@ -2070,8 +2070,7 @@ function resetMeasure() {
     state.lastDetectAt = 0;
     runShaftDetect(true);
   } else if (!isLieMode()) {
-    els.measureHint.textContent =
-      "좌우 ±0.5° 유지 → 자동 고정 후 샤프트를 수동으로 맞추세요";
+    els.measureHint.textContent = t("reset.lengthHint");
     els.viewport.classList.toggle("is-adjusting", state.frozen);
   } else {
     setDetectStatus("수동", "manual");

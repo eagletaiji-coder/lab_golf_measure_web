@@ -27,9 +27,7 @@ if (-not $branch) { exit 0 }
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $message = "Auto sync: $timestamp"
 
-git -c user.name="eagletaiji-coder" `
-    -c user.email="eagletaiji-coder@users.noreply.github.com" `
-    commit -m $message 2>$null
+git commit -m $message 2>$null
 if ($LASTEXITCODE -ne 0) { exit 0 }
 
 git push origin $branch 2>$null | Out-Null

@@ -1950,8 +1950,7 @@ function freezeFrame() {
     }
     els.measureHint.classList.remove("is-detecting", "is-miss");
     els.measureHint.classList.add("is-locked");
-    els.measureHint.textContent =
-      "고정됨 · 그립·헤드를 드래그하고 공 인식을 확인하세요";
+    els.measureHint.textContent = t("freeze.lengthLocked");
     queueMicrotask(() => runBallDetect(null));
     drawOverlay();
     return;

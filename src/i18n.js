@@ -165,7 +165,7 @@
       "measureHint.lengthFrozen": "Drag grip & head endpoints to align the shaft",
       "measureHint.lengthIdle":
         "Lay phone flat, hold ±0.5° → auto-freeze · manual shaft · auto ball",
-      "permission.title": "Start measuring with\ncamera & motion sensors",
+      "permission.title": "Start measuring with<br />camera & motion sensors",
       "permission.start": "Start",
       "permission.note": "Choose a mode, then capture",
       "permission.preparing": "Preparing…",

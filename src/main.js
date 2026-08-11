@@ -2066,7 +2066,7 @@ function resetMeasure() {
   }
   if (state.frozen) unfreezeFrame();
   if (isLieMode() && state.autoDetect) {
-    setDetectStatus("인식 중…", "detecting");
+    setDetectStatus("detect.searching", "detecting");
     state.lastDetectAt = 0;
     runShaftDetect(true);
   } else if (!isLieMode()) {

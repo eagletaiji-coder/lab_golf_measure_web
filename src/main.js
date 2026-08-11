@@ -1020,11 +1020,18 @@ function drawOverlay() {
   if (els.angleSub && pc) {
     const edgeNote =
       dual && ea.left != null && ea.right != null
-        ? `좌 ${ea.left.toFixed(1)}° · 우 ${ea.right.toFixed(1)}° · `
+        ? t("angleSub.edge", {
+            left: ea.left.toFixed(1),
+            right: ea.right.toFixed(1),
+          })
         : "";
-    els.angleSub.textContent = `${edgeNote}화면 ${pc.apparent.toFixed(1)}° · 피치 +${pc.delta.toFixed(1)}° · 미세조정 ${
-      (pc.trim >= 0 ? "+" : "") + pc.trim.toFixed(1)
-    }°`;
+    els.angleSub.textContent =
+      edgeNote +
+      t("angleSub.detail", {
+        apparent: pc.apparent.toFixed(1),
+        delta: pc.delta.toFixed(1),
+        trim: `${pc.trim >= 0 ? "+" : ""}${pc.trim.toFixed(1)}`,
+      });
   }
 
   if (els.pitchStatus) {

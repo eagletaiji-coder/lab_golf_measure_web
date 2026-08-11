@@ -1559,11 +1559,12 @@ function runShaftDetect(force = false) {
       if (state.missStreak >= 5) {
         state.detectOk = false;
         setDetectStatus(
-          seg ? `약함 ${seg.score.toFixed(0)}` : "미감지 · 중앙에 샤프트",
-          "miss"
+          seg ? "detect.weak" : "detect.notFound",
+          "miss",
+          seg ? { score: seg.score.toFixed(0) } : {}
         );
       } else if (!state.detectOk) {
-        setDetectStatus("찾는 중…", "detecting");
+        setDetectStatus("detect.finding", "detecting");
       }
     }
   } catch (err) {

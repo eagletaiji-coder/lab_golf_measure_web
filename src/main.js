@@ -575,7 +575,7 @@ function setMeasureMode(mode) {
     applyActiveModeUi();
   } else if (next === "length") {
     if (els.autoBtn) {
-      els.autoBtn.textContent = "공 자동 인식";
+      els.autoBtn.textContent = t("ball.autoDetect");
       els.autoBtn.classList.remove("is-on");
       els.autoBtn.disabled = !state.ready;
     }
@@ -1779,7 +1779,7 @@ function enableControls(on) {
   els.autoBtn.disabled = !on;
   if (els.autoBtn && on) {
     if (!isLieMode()) {
-      els.autoBtn.textContent = "공 자동 인식";
+      els.autoBtn.textContent = t("ball.autoDetect");
       els.autoBtn.classList.remove("is-on");
     } else {
       els.autoBtn.textContent = state.autoDetect ? "자동 인식 ON" : "자동 인식 OFF";
@@ -1950,7 +1950,7 @@ function freezeFrame() {
     state.detectOk = false;
     els.viewport.classList.add("is-adjusting");
     if (els.autoBtn) {
-      els.autoBtn.textContent = "공 자동 인식";
+      els.autoBtn.textContent = t("ball.autoDetect");
       els.autoBtn.classList.remove("is-on");
     }
     els.measureHint.classList.remove("is-detecting", "is-miss");

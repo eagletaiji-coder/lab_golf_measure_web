@@ -7,3 +7,6 @@ dist
 .DS_Store
 *.local
 *.zip
+
+# Cursor hook runtime
+.cursor/hooks/.git-sync-last

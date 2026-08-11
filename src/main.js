@@ -783,7 +783,7 @@ function drawLengthOverlay(width, height) {
     if (!adjusting) {
       ctx.fillStyle = "rgba(180, 210, 240, 0.95)";
       ctx.font = "600 12px Outfit, sans-serif";
-      ctx.fillText(`공 Ø ${getBallDiamMm().toFixed(2)} mm`, bx - br, by - br - 10);
+      ctx.fillText(t("ball.diameterLabel", { diam: getBallDiamMm().toFixed(2) }), bx - br, by - br - 10);
     }
     ctx.restore();
   } else if (!state.ballSeed) {

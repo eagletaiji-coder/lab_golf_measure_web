@@ -646,7 +646,7 @@ function updateBallStatusUI() {
     els.ballStatus.classList.remove("is-ok");
     els.ballStatus.classList.add("is-warn");
   } else {
-    els.ballStatus.textContent = "설정됨 · 드래그 가능";
+    els.ballStatus.textContent = t("ball.set");
     els.ballStatus.classList.add("is-ok");
     els.ballStatus.classList.remove("is-warn");
   }

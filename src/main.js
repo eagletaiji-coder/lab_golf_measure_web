@@ -1038,9 +1038,13 @@ function drawOverlay() {
     if (pc && Math.abs(pc.delta) >= 0.2) {
       const floorNote =
         state.floorLookdownComp && pc.pitchDown >= MIN_FLOOR_LOOKDOWN_DEG - 0.1
-          ? ` (바닥최소 ${MIN_FLOOR_LOOKDOWN_DEG}°)`
+          ? t("pitch.floorMin", { deg: String(MIN_FLOOR_LOOKDOWN_DEG) })
           : "";
-      els.pitchStatus.textContent = `피치 ${pc.pitchDown.toFixed(0)}° → +${pc.delta.toFixed(1)}°${floorNote}`;
+      els.pitchStatus.textContent = t("pitch.corr", {
+        pitch: pc.pitchDown.toFixed(0),
+        delta: pc.delta.toFixed(1),
+        floor: floorNote,
+      });
       els.pitchStatus.classList.add("is-ok");
       els.pitchStatus.classList.remove("is-warn");
     } else {

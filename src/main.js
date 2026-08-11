@@ -2238,6 +2238,8 @@ window.addEventListener("resize", () => {
   if (state.ready) drawOverlay();
 });
 
+window.LieI18n?.onChange?.(() => refreshI18n());
+
 // Desktop fallback: mouse-based fake level (centered = level) when no sensors
 if (!window.DeviceOrientationEvent) {
   state.beta = 90;

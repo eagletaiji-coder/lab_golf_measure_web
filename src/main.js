@@ -174,7 +174,8 @@ function createModeSession(kind) {
     edgeWeights: { left: 1, right: 1 },
     autoDetect: kind === "lie",
     detectOk: false,
-    detectLabel: "대기",
+    detectI18n: { key: "status.waiting", params: {} },
+    detectStatusKind: null,
     missStreak: 0,
     lastDetectAt: 0,
     pitchCorrection: {

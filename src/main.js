@@ -1525,7 +1525,7 @@ function runShaftDetect(force = false) {
   if (rect.width < 10 || rect.height < 10) return;
 
   state.detectBusy = true;
-  if (!state.detectOk) setDetectStatus("인식 중…", "detecting");
+  if (!state.detectOk) setDetectStatus("detect.searching", "detecting");
 
   const useCover = !state.frozen;
 

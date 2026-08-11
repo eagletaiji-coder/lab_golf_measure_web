@@ -1491,13 +1491,18 @@ function applyDetectedShaft(seg, smooth) {
   const ea = state.edgeAngles;
   if (seg.dualEdge && ea.left != null && ea.right != null && isLieMode()) {
     setDetectStatus(
-      `양면 ${ea.left.toFixed(1)}/${ea.right.toFixed(1)} → ${lie.toFixed(1)}°`,
-      "ok"
+      "detect.dualOk",
+      "ok",
+      {
+        left: ea.left.toFixed(1),
+        right: ea.right.toFixed(1),
+        angle: lie.toFixed(1),
+      }
     );
   } else if (isLieMode()) {
-    setDetectStatus(`감지 ${lie.toFixed(1)}°`, "ok");
+    setDetectStatus("detect.found", "ok", { angle: lie.toFixed(1) });
   } else {
-    setDetectStatus("샤프트 인식", "ok");
+    setDetectStatus("detect.shaftOk", "ok");
   }
 }
 

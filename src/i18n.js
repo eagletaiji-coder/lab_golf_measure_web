@@ -24,7 +24,7 @@
       "measureHint.lengthFrozen": "그립·헤드 끝점을 드래그해 샤프트를 맞추세요",
       "measureHint.lengthIdle":
         "핸드폰을 눕혀 ±0.5° 유지 → 자동 고정 · 샤프트 수동 · 공 자동",
-      "permission.title": "카메라와 모션 센서로\n측정을 시작합니다",
+      "permission.title": "카메라와 모션 센서로<br />측정을 시작합니다",
       "permission.start": "측정 시작",
       "permission.note": "모드를 선택한 뒤 촬영하세요",
       "permission.preparing": "준비 중…",

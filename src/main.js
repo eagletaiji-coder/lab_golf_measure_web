@@ -2100,7 +2100,7 @@ function captureResult() {
   octx.font = "600 13px Outfit, sans-serif";
   let fileTag;
   if (isLieMode()) {
-    octx.fillText("LieLine 라이각", 24, 34);
+    octx.fillText(t("capture.lieTitle"), 24, 34);
     octx.font = "700 28px Fraunces, serif";
     octx.fillText(`${getLieAngle().toFixed(1)}°`, 24, 60);
     fileTag = `${getLieAngle().toFixed(1)}deg`;

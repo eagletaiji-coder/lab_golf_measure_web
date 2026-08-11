@@ -677,7 +677,7 @@ function drawLengthOverlay(width, height) {
     updateLengthReadout();
     updateBallStatusUI();
     if (els.detectStatusLength) {
-      els.detectStatusLength.textContent = "고정 대기";
+      els.detectStatusLength.textContent = t("status.waitFreeze");
       els.detectStatusLength.classList.remove("is-ok");
     }
     return;

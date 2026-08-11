@@ -2176,11 +2176,8 @@ async function start() {
   } catch (err) {
     console.error(err);
     els.startBtn.disabled = false;
-    els.startBtn.textContent = "측정 시작";
-    alert(
-      err?.message ||
-        "카메라/센서 권한을 허용해 주세요. HTTPS 또는 localhost에서 실행해야 합니다."
-    );
+    els.startBtn.textContent = t("permission.start");
+    alert(err?.message || t("error.start"));
   }
 }
 

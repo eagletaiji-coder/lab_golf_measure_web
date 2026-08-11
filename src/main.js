@@ -1378,8 +1378,10 @@ function updateLevelUI(force = false) {
   state.wasFreezeReady = holdDone;
 }
 
-function setDetectStatus(label, kind) {
-  state.detectLabel = label;
+function setDetectStatus(key, kind, params = {}) {
+  state.detectI18n = { key, params };
+  state.detectStatusKind = kind;
+  const label = t(key, params);
   els.detectStatus.textContent = label;
   els.detectStatus.classList.toggle("is-ok", kind === "ok");
   els.detectStatus.classList.toggle("is-warn", kind === "warn" || kind === "miss");
@@ -1395,32 +1397,36 @@ function setDetectStatus(label, kind) {
     if (!isLieMode()) {
       const info = getShaftLengthInfo();
       els.measureHint.textContent = info
-        ? `길이 ${info.inches.toFixed(1)} in · 끝점을 드래그로 보정`
-        : "그립·헤드 끝점을 드래그해 샤프트를 맞추세요";
+        ? t("length.lengthOk", { inches: info.inches.toFixed(1) })
+        : t("measureHint.lengthFrozen");
     } else {
       const ea = state.edgeAngles;
       if (state.shaft.left && state.shaft.right && ea.left != null && ea.right != null) {
-        els.measureHint.textContent = `양면 평균 ${getLieAngle().toFixed(1)}° (좌 ${ea.left.toFixed(1)}° · 우 ${ea.right.toFixed(1)}°) · 드래그로 보정`;
+        els.measureHint.textContent = t("detect.dualDetail", {
+          angle: getLieAngle().toFixed(1),
+          left: ea.left.toFixed(1),
+          right: ea.right.toFixed(1),
+        });
       } else {
-        els.measureHint.textContent = `자동 인식 ${getLieAngle().toFixed(1)}° · 필요하면 드래그로 보정`;
+        els.measureHint.textContent = t("detect.autoOk", { angle: getLieAngle().toFixed(1) });
       }
     }
   } else if (kind === "detecting") {
     els.measureHint.classList.add("is-detecting");
     els.measureHint.textContent = isLieMode()
-      ? "샤프트 자동 인식 중…"
-      : "그립·헤드 끝점을 드래그해 샤프트를 맞추세요";
+      ? t("measureHint.shaftDetecting")
+      : t("measureHint.lengthFrozen");
   } else if (kind === "miss") {
     els.measureHint.classList.add("is-miss");
-    els.measureHint.textContent = "인식 실패 · 배경을 단순하게 하거나 수동 조정";
+    els.measureHint.textContent = t("detect.miss");
   } else if (kind === "manual") {
     els.measureHint.textContent = isLieMode()
-      ? "수동 조정 중 · 다시 자동하려면 자동 인식"
-      : "고정 후 그립·헤드 끝점을 드래그 · 공은 자동 인식";
+      ? t("detect.manualLie")
+      : t("detect.manualLength");
   } else {
     els.measureHint.textContent = isLieMode()
-      ? "샤프트를 화면 중앙에 두고 자동 인식을 켜세요"
-      : "좌우 ±0.5°를 유지하면 자동 고정됩니다";
+      ? t("detect.idleLie")
+      : t("detect.idleLength");
   }
 }
 

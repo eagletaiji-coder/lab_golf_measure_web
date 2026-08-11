@@ -632,7 +632,10 @@ function updateLengthReadout() {
   }
   els.shaftLength.textContent = `${info.inches.toFixed(1)} in / ${info.cm.toFixed(1)} cm`;
   if (els.lengthSub) {
-    els.lengthSub.textContent = `기준 공 ${getBallDiamMm().toFixed(2)} mm · ${info.mm.toFixed(0)} mm`;
+    els.lengthSub.textContent = t("length.refBall", {
+      diam: getBallDiamMm().toFixed(2),
+      mm: info.mm.toFixed(0),
+    });
   }
 }
 

@@ -99,6 +99,15 @@ function t(key, params) {
 
 function refreshI18n() {
   window.LieI18n?.applyStatic?.();
+  if (els.levelLabel && !state.ready) {
+    els.levelLabel.textContent = t("level.default");
+  }
+  if (els.levelFlash) {
+    els.levelFlash.textContent = t("level.flash");
+  }
+  if (els.measureHint && !state.ready) {
+    els.measureHint.textContent = t("measureHint.shaftDetecting");
+  }
   applyActiveModeUi();
   updateLevelUI(true);
   drawOverlay();

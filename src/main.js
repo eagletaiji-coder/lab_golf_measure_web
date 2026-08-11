@@ -1762,10 +1762,7 @@ async function startCamera() {
       els.camera.srcObject = stream;
       await els.camera.play();
     } catch {
-      throw new Error(
-        err?.message ||
-          "카메라 권한이 필요합니다. 주소창에서 카메라를 허용하고, HTTPS/localhost인지 확인하세요."
-      );
+      throw new Error(err?.message || t("error.cameraPerm"));
     }
   }
 }

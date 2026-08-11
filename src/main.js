@@ -707,10 +707,11 @@ function drawLengthOverlay(width, height) {
   ctx.stroke();
   ctx.restore();
 
-  for (const [hx, hy, label] of [
-    [x1, y1, "그립"],
-    [x2, y2, "헤드"],
+  for (const [hx, hy, labelKey] of [
+    [x1, y1, "overlay.grip"],
+    [x2, y2, "overlay.head"],
   ]) {
+    const label = t(labelKey);
     ctx.save();
     ctx.globalAlpha = adjusting ? 0.55 : 1;
     ctx.beginPath();

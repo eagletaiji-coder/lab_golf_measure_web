@@ -2009,7 +2009,7 @@ function runBallDetect(seedOverride = undefined) {
   }
   if (!frame || typeof detectGolfBallFromImageData !== "function") {
     if (els.ballStatus) {
-      els.ballStatus.textContent = "인식 실패";
+      els.ballStatus.textContent = t("ball.detectFail");
       els.ballStatus.classList.add("is-warn");
     }
     return;

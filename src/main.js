@@ -859,7 +859,7 @@ function drawOverlay() {
     : "rgba(255, 180, 170, 0.9)";
   ctx.font = "600 11px Outfit, sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText(rollOk ? "Roll 수평 ✓" : "Roll (수평)", 0, -12);
+  ctx.fillText(rollOk ? t("overlay.rollOk") : t("overlay.roll"), 0, -12);
   ctx.textAlign = "start";
   ctx.restore();
 

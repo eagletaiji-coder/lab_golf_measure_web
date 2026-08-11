@@ -1782,7 +1782,7 @@ function enableControls(on) {
       els.autoBtn.textContent = t("ball.autoDetect");
       els.autoBtn.classList.remove("is-on");
     } else {
-      els.autoBtn.textContent = state.autoDetect ? "자동 인식 ON" : "자동 인식 OFF";
+      els.autoBtn.textContent = state.autoDetect ? t("ctrl.autoOn") : t("ctrl.autoOff");
       els.autoBtn.classList.toggle("is-on", state.autoDetect);
     }
   }

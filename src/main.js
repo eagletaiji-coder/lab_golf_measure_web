@@ -888,7 +888,7 @@ function drawOverlay() {
   ctx.setLineDash([]);
   ctx.fillStyle = "rgba(243, 247, 244, 0.7)";
   ctx.font = "500 11px Outfit, sans-serif";
-  ctx.fillText("바닥 (화면 수평)", width * 0.06, groundY - 8);
+  ctx.fillText(t("overlay.ground"), width * 0.06, groundY - 8);
   ctx.restore();
 
   // Soft center guide

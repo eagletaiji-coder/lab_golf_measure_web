@@ -1547,7 +1547,7 @@ function runShaftDetect(force = false) {
       frame = cctx.getImageData(0, 0, w, h);
     }
     if (!frame) {
-      setDetectStatus("프레임 없음", "miss");
+      setDetectStatus("detect.noFrame", "miss");
       return;
     }
     const prior = state.detectOk ? { ...state.shaft } : null;
